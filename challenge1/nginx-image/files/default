@@ -1,0 +1,20 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    # Set error log location and level
+    error_log  /var/log/nginx/error.log debug;
+
+    location / {
+        # Allow all files and directories
+        autoindex on;
+
+        # Serve the requested file if it exists, return a 404 error otherwise
+        try_files $uri $uri/ =404;
+    }
+}
